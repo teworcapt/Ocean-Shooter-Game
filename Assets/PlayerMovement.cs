@@ -32,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        anim.SetFloat("Horizontal", movementInput.x);
+        anim.SetFloat("Speed", movementInput.sqrMagnitude);
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject Bullet = Instantiate(bulletPreFab, bulletSpawnPoint.position, Quaternion.identity);
@@ -42,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        movementInput.y = 0;
         //makes our player move
         rigidBody.velocity = movementInput * moveSpeed;
     }
@@ -50,5 +54,6 @@ public class PlayerMovement : MonoBehaviour
     {
         //wasd = vector 2 values
         movementInput = inputValue.Get<Vector2>();
+
     }
 }
